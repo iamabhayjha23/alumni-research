@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width , initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Analytics Dashboard</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="/<%=username%>">ALUMNI MANAGEMENT SYSTEM</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/<%=username%>/post">ADD POSTS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/<%=username%>/pastev">PAST EVENTS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/<%=username%>/job-board">JOB BOARD</a>
+          </li>
+          <% if(desig === "Professor") { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/<%=username%>/add-event" style="color: #ffc107;">ADD EVENT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/<%=username%>/analytics" style="color: #007bff;">ANALYTICS</a>
+            </li>
+          <% } %>
+        </ul>
+      </div>
+    </nav>
+    <div class="container" style="margin-top: 30px;">
+      <h1 class="text-center">Analytics Dashboard</h1>
+      <hr>
+      
+      <h3>Platform Statistics</h3>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Total Alumni</div>
+            <div class="card-body">
+              <h1 class="card-title text-center"><%= stats.alumni %></h1>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-white bg-info mb-3">
+            <div class="card-header">Total Students</div>
+            <div class="card-body">
+              <h1 class="card-title text-center"><%= stats.students %></h1>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-white bg-secondary mb-3">
+            <div class="card-header">Total Professors</div>
+            <div class="card-body">
+              <h1 class="card-title text-center"><%= stats.professors %></h1>
+            </div>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <h3>Top 10 Alumni Companies</h3>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <canvas id="companyChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Get data from EJS
+      // We put the EJS tag in quotes to create a valid JS string.
+      // This stops the linter from showing an error.
+      const companyDataJSON = '<%- JSON.stringify(companyData) %>';
+      const companyData = JSON.parse(companyDataJSON);
+
+      // Process data for Chart.js
+      const labels = companyData.map(item => item._id);
+      const data = companyData.map(item => item.count);
+
+      const ctx = document.getElementById('companyChart').getContext('2d');
+      const myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: labels,
+              datasets: [{
+                  label: '# of Alumni',
+                  data: data,
+                  backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                  borderColor: 'rgba(54, 162, 235, 1)',
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              },
+              responsive: true,
+              plugins: {
+                legend: {
+                  display: false
+                }
+              }
+          }
+      });
+    </script>
+  </body>
+</html>

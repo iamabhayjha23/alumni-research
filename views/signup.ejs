@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width , initial-scale=1.0">
+    <title>Signup</title>
+    <link href="https://fonts.googleapis.com/css?family=Odibee+Sans|Source+Sans+Pro|Tomorrow&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/signup.css">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+  <a href="/" class="navbar-brand"><img style="width:80px;height:80px;" src="images/logo.PNG" alt=""></a>
+<h3 class="a">ALUMNI MANAGEMENT SYSTEM</h3>
+</nav>
+<br><br><br>
+    <!-- FORM START -->
+    <h3>SIGN UP FORM</h3>
+    <form class="" action="" method="post">
+      <select class="form-control" name="select">
+        <option  name="alumni" selected>Alumnus</option>
+        <option  name="professor">Professor</option>
+        <option  name="student">Student</option>
+</select>
+      <br><br>
+      <input type="text" name="name1" value="" placeholder="Name" required><br><br>
+      <input type="text" name="username" value="" placeholder="Username" required><br><br>
+      <input type="email" name="email" value="" placeholder="Email" required><br><br>
+      <input type="text" name="mob" value="" placeholder="Mobile" required><br><br>
+      <input type="text" name="company" value="" placeholder="Company (Optional)"><br><br>
+      <input type="password" name="password" value="" placeholder="Password" minlength="8" required title="8 characters minimum"><br><br>
+      <button type="submit" class="btn btn-warning" name="button">Submit</button>
+      <br>
+      <label style="color:green;">Already a member?</label>
+      <br>
+      <a href="/login"><button type="button" class="btn btn-success" name="button">Log In</button></a>
+    </form>
+
+    <!-- FORM END -->
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width , initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link href="https://fonts.googleapis.com/css?family=Odibee+Sans|Source+Sans+Pro|Tomorrow&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/signup.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <a href="/" class="navbar-brand"><img style="width:80px;height:80px;" src="/images/logo.PNG" alt=""></a>
+      <h3 class="a">ALUMNI MANAGEMENT SYSTEM</h3>
+    </nav>
+<br><br><br>
+    <h3>EDIT YOUR PROFILE</h3>
+    <form class="" action="/<%= user.username %>/edit" method="post">
+      <br>
+      <label>Name:</label><br>
+      <input type="text" name="name1" value="<%= user.name1 %>" required><br><br>
+      
+      <label>Username (cannot be changed):</label><br>
+      <input type="text" name="username" value="<%= user.username %>" readonly disabled><br><br>
+      
+      <label>Email:</label><br>
+      <input type="email" name="email" value="<%= user.email %>" required><br><br>
+      
+      <label>Mobile:</label><br>
+      <input type="text" name="mob" value="<%= user.mobile %>" required><br><br>
+      
+      <% if(user.designation === "Alumnus") { %>
+        <label>Company:</label><br>
+        <input type="text" name="company" value="<%= user.company || '' %>"><br><br>
+      <% } %>
+      <% if(user.designation === "Alumnus") { %>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" 
+               name="isProfilePrivate" 
+               value="true" 
+               id="privacyCheck" 
+               <% if(user.isProfilePrivate) { %>checked<% } %> >
+        
+        <label class="form-check-label" for="privacyCheck">
+          Hide my Email & Phone from Students
+        </label>
+      </div>
+      <% } %>
+      <br>
+      <button type="submit" class="btn btn-warning" name="button">Update Profile</button>
+      <br><br>
+      <a href="/<%= user.username %>"><button type="button" class="btn btn-info">Cancel</button></a>
+      <br><br>
+    </form>
+
+    </body>
+</html>
