@@ -1,4 +1,5 @@
 // jshint esversion:6
+const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -12,7 +13,10 @@ const flash = require("connect-flash");
 
 const app = express();
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+// Explicitly point to the views folder
+app.set("views", path.join(__dirname, "views"));
+// Explicitly point to the public folder
+app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({
   extended: true
 }));
